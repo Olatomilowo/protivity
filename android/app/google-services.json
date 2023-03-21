@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2962070291",
+    "project_id": "protivity-f2437",
+    "storage_bucket": "protivity-f2437.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2962070291:android:2720324d62e7aecc1018e6",
+        "android_client_info": {
+          "package_name": "com.grazac.protivity_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2962070291-n7u7ba0kt5m63n9kr6tgls0gb2mkscjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsh_3OTHOw8dgjgamTa6Ax5-45FvBBBKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2962070291-n7u7ba0kt5m63n9kr6tgls0gb2mkscjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
