@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
                   child: Text('An error has occur'),
                 );
               } else if (snapshot.hasData) {
-                return TaskHome();
+                return HomeScreen();
               } else {
                 return SplashScreen();
               }

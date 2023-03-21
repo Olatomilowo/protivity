@@ -51,6 +51,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 SizedBox(height: getProportionateScreenHeight(30)),
                 CustomInputField(
+                  keyboard: TextInputType.name,
                   inputController: _firstNameController,
                   hintText: 'First Name',
                 ),
@@ -58,6 +59,7 @@ class _SignUpState extends State<SignUp> {
                   height: getProportionateScreenHeight(25),
                 ),
                 CustomInputField(
+                  keyboard: TextInputType.name,
                   inputController: _lastNameController,
                   hintText: 'Last Name',
                 ),
@@ -65,6 +67,7 @@ class _SignUpState extends State<SignUp> {
                   height: getProportionateScreenHeight(25),
                 ),
                 CustomInputField(
+                  keyboard: TextInputType.emailAddress,
                   inputController: _emailController,
                   hintText: 'E-mail',
                 ),
@@ -174,12 +177,18 @@ class _SignUpState extends State<SignUp> {
           'first_name': _firstNameController.text,
           'last_name': _lastNameController.text
         });
+        print('i am ok here');
+        // Navigator.pop(context);
+        print('out out');
         Navigator.push(
             context, MaterialPageRoute(builder: ((context) => LogIn())));
       });
     } on FirebaseAuthException catch (e) {
-      failureSnackBar(context: context, message: e.message.toString());
+      print('i am in error');
+      print(e.message!);
+      Navigator.pop(context);
+      failureSnackBar(context: context, message: e.message!);
+      // successSnackBar(context: context, message: e.message!);
     }
-    Navigator.pop(context);
   }
 }

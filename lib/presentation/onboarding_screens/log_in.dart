@@ -44,7 +44,9 @@ class _LogInState extends State<LogIn> {
                 ),
                 SizedBox(height: 30),
                 CustomInputField(
-                    inputController: _emailController, hintText: 'E-mail'),
+                    keyboard: TextInputType.emailAddress,
+                    inputController: _emailController,
+                    hintText: 'E-mail'),
                 SizedBox(height: 30),
                 TextFormField(
                   obscureText: true,
@@ -143,11 +145,11 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text)
-          .then((value) => Navigator.push(
-              context, MaterialPageRoute(builder: ((context) => TaskHome()))));
+          .then((value) => Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: ((context) => HomeScreen()))));
     } on FirebaseAuthException catch (e) {
       failureSnackBar(context: context, message: e.message.toString());
+      Navigator.pop(context);
     }
-    Navigator.pop(context);
   }
 }

@@ -4,16 +4,19 @@ import '../size_config.dart';
 
 class CustomInputField extends StatelessWidget {
   const CustomInputField(
-      {required this.inputController, required this.hintText});
+      {required this.inputController, 
+      required this.keyboard,
+      required this.hintText});
 
   final TextEditingController inputController;
   final String hintText;
+  final TextInputType keyboard;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: inputController,
-      keyboardType: TextInputType.name,
+      keyboardType: keyboard,
       decoration: InputDecoration(
         fillColor: Colors.grey,
         filled: true,
