@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:protivity_app/sign_up.dart';
+import 'package:protivity_app/presentation/onboarding_screens/sign_up.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

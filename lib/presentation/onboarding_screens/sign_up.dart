@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:protivity_app/log_in.dart';
-import 'package:protivity_app/util.dart';
+import 'package:protivity_app/core/size_config.dart';
+import 'package:protivity_app/presentation/onboarding_screens/log_in.dart';
+import 'package:protivity_app/core/util.dart';
+
+import '../../core/widgets/custom_input_widget.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -20,91 +23,54 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 9, 16),
       body: Padding(
-        padding: EdgeInsets.only(left: 24, top: 25, right: 24),
+        padding: EdgeInsets.only(
+            left: getProportionateScreenWidth(24),
+            top: getProportionateScreenHeight(25),
+            right: getProportionateScreenWidth(24)),
         child: SingleChildScrollView(
           child: Form(
             key: _signUpKey,
             child: Column(
               children: [
                 Center(
-                    child: Image.asset(
-                        width: 500, height: 200, 'images/Logo_only.png')),
+                    child: SizedBox(
+                        height: getProportionateScreenHeight(250),
+                        width: getProportionateScreenWidth(300),
+                        child: Image.asset('images/Logo_only.png'))),
                 Text(
                   'Create Your Account',
                   style: TextStyle(
                       color: Colors.white,
                       fontStyle: FontStyle.normal,
-                      fontSize: 24,
+                      fontSize: getProportionateScreenWidth(30),
                       fontWeight: FontWeight.w500),
                 ),
-                SizedBox(height: 30),
-                TextFormField(
-                  controller: _firstNameController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey,
-                    filled: true,
-                    hintText: 'First Name',
-                    contentPadding: EdgeInsets.only(left: 14),
-                    focusColor: Color(0xffA0A0A0),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none),
-                  ),
-                  validator: (value) {
-                    if (_firstNameController.text.isEmpty) {
-                      return 'Enter First Name';
-                    } else {
-                      return null;
-                    }
-                  },
+                SizedBox(height: getProportionateScreenHeight(30)),
+                CustomInputField(
+                  inputController: _firstNameController,
+                  hintText: 'First Name',
                 ),
-                SizedBox(height: 25),
-                TextFormField(
-                  controller: _lastNameController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey,
-                      filled: true,
-                      hintText: 'Last Name',
-                      contentPadding: EdgeInsets.only(left: 14),
-                      focusColor: Color(0xffA0A0A0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none)),
-                  validator: (value) {
-                    if (_lastNameController.text.isEmpty) {
-                      return 'Enter Last Name';
-                    } else {
-                      return null;
-                    }
-                  },
+                SizedBox(
+                  height: getProportionateScreenHeight(25),
                 ),
-                SizedBox(height: 25),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey,
-                      filled: true,
-                      hintText: 'E-mail',
-                      contentPadding: EdgeInsets.only(left: 14),
-                      focusColor: Color(0xffA0A0A0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none)),
-                  validator: (value) {
-                    if (_emailController.text.isEmpty) {
-                      return 'Enter E-mail';
-                    } else {
-                      return null;
-                    }
-                  },
+                CustomInputField(
+                  inputController: _lastNameController,
+                  hintText: 'Last Name',
                 ),
-                SizedBox(height: 25),
+                SizedBox(
+                  height: getProportionateScreenHeight(25),
+                ),
+                CustomInputField(
+                  inputController: _emailController,
+                  hintText: 'E-mail',
+                ),
+                SizedBox(
+                  height: getProportionateScreenHeight(25),
+                ),
                 TextFormField(
                   obscureText: true,
                   controller: _passwordController,
@@ -113,7 +79,8 @@ class _SignUpState extends State<SignUp> {
                       fillColor: Colors.grey,
                       filled: true,
                       hintText: 'Password',
-                      contentPadding: EdgeInsets.only(left: 14),
+                      contentPadding: EdgeInsets.only(
+                          left: getProportionateScreenWidth(14)),
                       focusColor: Color(0xffA0A0A0),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -126,10 +93,10 @@ class _SignUpState extends State<SignUp> {
                     }
                   },
                 ),
-                SizedBox(height: 70),
+                SizedBox(height: getProportionateScreenHeight(70)),
                 SizedBox(
                   width: double.infinity,
-                  height: 52,
+                  height: getProportionateScreenHeight(60),
                   child: ElevatedButton(
                     onPressed: () {
                       signUp();
@@ -138,7 +105,7 @@ class _SignUpState extends State<SignUp> {
                       'Sign Up',
                       style: TextStyle(
                         color: Color(0xffF1E9E9),
-                        fontSize: 22,
+                        fontSize: getProportionateScreenWidth(22),
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
                       ),
@@ -149,7 +116,7 @@ class _SignUpState extends State<SignUp> {
                     )),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: getProportionateScreenHeight(5)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -157,21 +124,19 @@ class _SignUpState extends State<SignUp> {
                       'Already have an account?',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 12,
+                        fontSize: getProportionateScreenWidth(14),
                         fontStyle: FontStyle.normal,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => LogIn())));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) => LogIn())));
                       },
                       child: Text(
                         'LogIn',
                         style: TextStyle(
-                            fontSize: 12,
+                            fontSize: getProportionateScreenWidth(14),
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w500,
                             color: Color(0xff3484ED)),

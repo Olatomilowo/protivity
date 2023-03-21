@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:protivity_app/new_home/home.dart';
-import 'package:protivity_app/sign_up.dart';
-import 'package:protivity_app/util.dart';
+import 'package:protivity_app/core/size_config.dart';
+import 'package:protivity_app/core/widgets/custom_input_widget.dart';
+import 'package:protivity_app/presentation/onboarding_screens/sign_up.dart';
+import 'package:protivity_app/core/util.dart';
+
+import '../task_management_screens/home.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -18,6 +21,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 9, 16),
       body: Padding(
@@ -39,26 +43,8 @@ class _LogInState extends State<LogIn> {
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 30),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey,
-                      filled: true,
-                      hintText: 'E-mail',
-                      contentPadding: EdgeInsets.only(left: 14),
-                      focusColor: Color(0xffA0A0A0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none)),
-                  validator: (value) {
-                    if (_emailController.text.isEmpty) {
-                      return 'Enter E-mail';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+                CustomInputField(
+                    inputController: _emailController, hintText: 'E-mail'),
                 SizedBox(height: 30),
                 TextFormField(
                   obscureText: true,
@@ -158,7 +144,7 @@ class _LogInState extends State<LogIn> {
           .signInWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text)
           .then((value) => Navigator.push(
-              context, MaterialPageRoute(builder: ((context) => NHome()))));
+              context, MaterialPageRoute(builder: ((context) => TaskHome()))));
     } on FirebaseAuthException catch (e) {
       failureSnackBar(context: context, message: e.message.toString());
     }

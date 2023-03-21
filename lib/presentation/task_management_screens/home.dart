@@ -3,16 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:protivity_app/core/size_config.dart';
 
 import 'add_task.dart';
 import 'description.dart';
 
-class NHome extends StatefulWidget {
+class TaskHome extends StatefulWidget {
   @override
-  _NHomeState createState() => _NHomeState();
+  _TaskHomeState createState() => _TaskHomeState();
 }
 
-class _NHomeState extends State<NHome> {
+class _TaskHomeState extends State<TaskHome> {
   String uid = '';
   @override
   void initState() {
@@ -30,12 +31,13 @@ class _NHomeState extends State<NHome> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 9, 16),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 9, 16),
         automaticallyImplyLeading: false,
-        title: Text('TODO'),
+        title: Center(child: Text('My Todo List')),
         actions: [
           IconButton(
               icon: Icon(Icons.logout),
@@ -77,10 +79,13 @@ class _NHomeState extends State<NHome> {
                                   )));
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      margin: EdgeInsets.only(bottom: 10),
+                      padding: EdgeInsets.symmetric(
+                          vertical: getProportionateScreenHeight(15),
+                          horizontal: getProportionateScreenWidth(15)),
+                      margin: EdgeInsets.only(
+                          bottom: getProportionateScreenHeight(10)),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 174, 194, 240),
                           borderRadius: BorderRadius.circular(10)),
                       // height: 90,
                       child: Row(
@@ -90,12 +95,9 @@ class _NHomeState extends State<NHome> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                    margin: EdgeInsets.only(left: 20),
-                                    child: Text(docs![index]['title'],
-                                        selectionColor: Colors.white,
-                                        style:
-                                            GoogleFonts.roboto(fontSize: 20))),
+                                Text(docs![index]['title'],
+                                    selectionColor: Colors.white,
+                                    style: GoogleFonts.roboto(fontSize: 20)),
                                 SizedBox(
                                   height: 5,
                                 ),

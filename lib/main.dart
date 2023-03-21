@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:protivity_app/splash_screen.dart';
-import 'log_in.dart';
+import 'package:protivity_app/presentation/onboarding_screens/splash_screen.dart';
+import 'package:protivity_app/presentation/task_management_screens/home.dart';
+import 'presentation/onboarding_screens/log_in.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
                   child: Text('An error has occur'),
                 );
               } else if (snapshot.hasData) {
-                return LogIn();
+                return TaskHome();
               } else {
                 return SplashScreen();
               }
