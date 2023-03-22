@@ -61,7 +61,7 @@ class _UpdateTaskState extends State<UpdateTask> {
     String dueDate =
         '${_selectedDate.year}-${_selectedDate.month}-${_selectedDate.day}';
     String time = '${_todayDate.year}-${_todayDate.month}-${_todayDate.day}';
-    print(time);
+
     await FirebaseFirestore.instance
         .collection(user.uid)
         .doc(widget.taskId)

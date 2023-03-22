@@ -18,7 +18,7 @@ class _LogInState extends State<LogIn> {
   final _logInKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -49,14 +49,26 @@ class _LogInState extends State<LogIn> {
                     hintText: 'E-mail'),
                 SizedBox(height: 30),
                 TextFormField(
-                  obscureText: true,
+                  obscureText: isVisible,
                   controller: _passwordController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        child: isVisible
+                            ? Icon(Icons.visibility)
+                            : Icon(Icons.visibility_off),
+                      ),
                       fillColor: Colors.grey,
                       filled: true,
                       hintText: 'Password',
-                      contentPadding: EdgeInsets.only(left: 14),
+                      contentPadding: EdgeInsets.only(
+                          left: getProportionateScreenWidth(14),
+                          right: getProportionateScreenWidth(14)),
                       focusColor: Color(0xffA0A0A0),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),

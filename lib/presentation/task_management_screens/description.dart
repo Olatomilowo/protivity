@@ -8,7 +8,6 @@ class Description extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(description);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 9, 16),
       appBar: AppBar(

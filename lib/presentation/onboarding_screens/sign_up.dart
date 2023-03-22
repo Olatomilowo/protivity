@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +76,26 @@ class _SignUpState extends State<SignUp> {
                   height: getProportionateScreenHeight(25),
                 ),
                 TextFormField(
-                  obscureText: true,
+                  obscureText: isVisible,
                   controller: _passwordController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        child: isVisible
+                            ? Icon(Icons.visibility)
+                            : Icon(Icons.visibility_off),
+                      ),
                       fillColor: Colors.grey,
                       filled: true,
                       hintText: 'Password',
                       contentPadding: EdgeInsets.only(
-                          left: getProportionateScreenWidth(14)),
+                          left: getProportionateScreenWidth(14),
+                          right: getProportionateScreenWidth(14)),
                       focusColor: Color(0xffA0A0A0),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -177,15 +189,11 @@ class _SignUpState extends State<SignUp> {
           'first_name': _firstNameController.text,
           'last_name': _lastNameController.text
         });
-        print('i am ok here');
-        // Navigator.pop(context);
-        print('out out');
+
         Navigator.push(
             context, MaterialPageRoute(builder: ((context) => LogIn())));
       });
     } on FirebaseAuthException catch (e) {
-      print('i am in error');
-      print(e.message!);
       Navigator.pop(context);
       failureSnackBar(context: context, message: e.message!);
       // successSnackBar(context: context, message: e.message!);

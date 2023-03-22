@@ -57,7 +57,7 @@ class _AddTaskState extends State<AddTask> {
     String dueDate =
         '${_selectedDate.year}-${_selectedDate.month}-${_selectedDate.day}';
     String time = '${_todayDate.year}-${_todayDate.month}-${_todayDate.day}';
-    print(time);
+    
 
     try {
       DocumentReference docRef =
@@ -69,8 +69,7 @@ class _AddTaskState extends State<AddTask> {
       });
 
       String taskId = docRef.id;
-      print('here is the Id');
-      print(taskId);
+     
 
       await FirebaseFirestore.instance
           .collection(user.uid)
